@@ -1113,11 +1113,7 @@ github.com/programahaf-lab/MEI-Docs</div>
     function startAuto() {
       stopAuto();
       autoTimer = setInterval(() => {
-        if (cur < 1) {
-          go(1);
-        } else {
-          stopAuto();
-        }
+        goTo((cur + 1) % total);
       }, 4600);
     }
 
