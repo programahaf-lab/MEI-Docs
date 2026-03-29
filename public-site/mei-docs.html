@@ -472,6 +472,11 @@
       border: 1px solid rgba(123, 213, 255, 0.18);
       background: rgba(255, 255, 255, 0.045);
       overflow: hidden;
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        background 180ms ease;
     }
 
     .metric::before,
@@ -481,6 +486,47 @@
       inset: 0;
       pointer-events: none;
       background: linear-gradient(180deg, rgba(123, 213, 255, 0.1), transparent 24%);
+      opacity: 0.7;
+      transition: opacity 180ms ease;
+    }
+
+    .metric::after,
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -30% auto auto -10%;
+      width: 120px;
+      height: 160px;
+      pointer-events: none;
+      background: linear-gradient(135deg, rgba(147, 251, 255, 0.28), rgba(147, 251, 255, 0));
+      transform: rotate(24deg);
+      opacity: 0;
+      transition: opacity 180ms ease;
+    }
+
+    .metric:hover,
+    .card:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(147, 251, 255, 0.4);
+      background: rgba(255, 255, 255, 0.072);
+      box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.24),
+        0 0 28px rgba(103, 212, 255, 0.12),
+        inset 0 0 0 1px rgba(147, 251, 255, 0.08);
+    }
+
+    .metric:hover::before,
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .metric:hover::after,
+    .card:hover::after {
+      opacity: 1;
+    }
+
+    .metric:hover strong {
+      text-shadow: 0 0 24px rgba(103, 212, 255, 0.34);
     }
 
     .metric strong {
@@ -513,10 +559,22 @@
       background: linear-gradient(180deg, rgba(255, 96, 128, 0.08), rgba(255, 255, 255, 0.02));
     }
 
+    .danger:hover {
+      border-color: rgba(255, 155, 178, 0.34);
+      box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.24),
+        0 0 28px rgba(255, 125, 151, 0.14),
+        inset 0 0 0 1px rgba(255, 155, 178, 0.08);
+    }
+
     .danger .step {
       color: var(--warn);
       border-color: rgba(255, 155, 178, 0.24);
       background: rgba(255, 155, 178, 0.08);
+    }
+
+    .danger:hover .step {
+      box-shadow: 0 0 20px rgba(255, 125, 151, 0.18);
     }
 
     .positive {
@@ -528,6 +586,21 @@
       color: var(--good);
       border-color: rgba(91, 229, 168, 0.24);
       background: rgba(91, 229, 168, 0.08);
+    }
+
+    .positive:hover {
+      border-color: rgba(91, 229, 168, 0.34);
+      box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.24),
+        0 0 28px rgba(91, 229, 168, 0.12),
+        inset 0 0 0 1px rgba(91, 229, 168, 0.08);
+    }
+
+    .positive:hover .step,
+    .card:hover .step,
+    .metric:hover .step {
+      box-shadow: 0 0 20px rgba(103, 212, 255, 0.18);
+      border-color: rgba(147, 251, 255, 0.3);
     }
 
     .hero-visual {
