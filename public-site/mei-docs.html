@@ -73,31 +73,6 @@
       z-index: 1;
     }
 
-    .hud-left,
-    .hud-right {
-      position: fixed;
-      top: 18px;
-      z-index: 20;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-    .hud-left {
-      left: 24px;
-      color: var(--neon);
-    }
-
-    .hud-right {
-      right: 24px;
-      color: var(--muted);
-    }
-
-    .hud-right span {
-      color: var(--neon);
-    }
-
     .deck {
       position: relative;
       width: 100vw;
@@ -143,6 +118,10 @@
       background:
         radial-gradient(circle at 78% 30%, rgba(103, 212, 255, 0.16), transparent 22%),
         radial-gradient(circle at 18% 72%, rgba(42, 88, 255, 0.18), transparent 28%);
+    }
+
+    .slide.cover {
+      padding-top: 58px;
     }
 
     .slide.problem::before {
@@ -985,37 +964,14 @@
       box-shadow: 0 0 22px rgba(103, 212, 255, 0.58);
     }
 
-    .slide-index {
-      position: fixed;
-      right: 24px;
-      top: 50px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      z-index: 20;
-    }
-
-    .slide-index span {
-      color: var(--neon);
-    }
-
-    .autoplay-badge {
-      position: fixed;
-      bottom: 34px;
-      right: 24px;
-      color: var(--muted);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      z-index: 20;
-    }
-
     @media (max-width: 1040px) {
       .slide {
         padding: 20px 16px 138px;
         overflow: hidden;
+      }
+
+      .slide.cover {
+        padding-top: 42px;
       }
 
       .slide-grid,
@@ -1071,14 +1027,6 @@
         gap: 12px;
       }
 
-      .slide-index,
-      .hud-right {
-        right: 16px;
-      }
-
-      .hud-left {
-        left: 16px;
-      }
     }
 
     @media (max-width: 760px) {
@@ -1086,11 +1034,8 @@
         padding: 18px 12px 132px;
       }
 
-      .hud-left,
-      .hud-right,
-      .slide-index,
-      .autoplay-badge {
-        display: none;
+      .slide.cover {
+        padding-top: 34px;
       }
 
       .nav {
@@ -1123,10 +1068,6 @@
 </head>
 <body>
   <div class="mouse-glow" id="mouseGlow"></div>
-  <div class="hud-left">MEI DOCS // AGENT-LED DOCUMENTATION</div>
-  <div class="hud-right">No scroll <span>deck mode</span></div>
-  <div class="slide-index">Slide <span id="cn">1</span> / <span id="tn">6</span></div>
-  <div class="autoplay-badge">capa em autoplay • setas navegam</div>
 
   <div class="deck" id="deck">
     <section class="slide cover active">
@@ -1452,16 +1393,12 @@ contato@meidocs.dev</div>
     const slides = Array.from(document.querySelectorAll('.slide'));
     const total = slides.length;
     const dotsEl = document.getElementById('dots');
-    const cn = document.getElementById('cn');
-    const tn = document.getElementById('tn');
     const nextBtn = document.getElementById('nextBtn');
     const mouseGlow = document.getElementById('mouseGlow');
     let cur = 0;
     let busy = false;
     let autoTimer;
     let idleTimer;
-
-    tn.textContent = String(total);
 
     slides.forEach((_, index) => {
       const dot = document.createElement('button');
@@ -1476,7 +1413,6 @@ contato@meidocs.dev</div>
     });
 
     function ui() {
-      cn.textContent = String(cur + 1);
       nextBtn.disabled = cur === total - 1;
       document.querySelectorAll('.dot').forEach((dot, index) => {
         dot.classList.toggle('on', index === cur);
@@ -1525,7 +1461,7 @@ contato@meidocs.dev</div>
 
     function startAuto() {
       stopAuto();
-      const delay = cur === total - 1 ? 7600 : 4600;
+      const delay = cur === total - 1 ? 9800 : 7200;
       autoTimer = setTimeout(() => {
         goTo((cur + 1) % total);
         startAuto();
