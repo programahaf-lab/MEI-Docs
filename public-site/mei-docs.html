@@ -605,6 +605,176 @@
       border: 1px dashed rgba(123, 213, 255, 0.16);
     }
 
+    .chat-window {
+      position: relative;
+      border-radius: 24px;
+      border: 1px solid rgba(123, 213, 255, 0.18);
+      background: rgba(4, 10, 22, 0.78);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(123, 213, 255, 0.04);
+    }
+
+    .chat-window::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(123, 213, 255, 0.08), transparent 22%);
+      pointer-events: none;
+    }
+
+    .chat-topbar {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(123, 213, 255, 0.12);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .chat-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .chat-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: #031425;
+      font-size: 12px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--cyan) 0%, var(--neon) 100%);
+      box-shadow: 0 0 18px rgba(123, 213, 255, 0.24);
+      flex-shrink: 0;
+    }
+
+    .chat-title strong {
+      display: block;
+      color: var(--text);
+      font-size: 13px;
+      letter-spacing: 0.03em;
+    }
+
+    .chat-title span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .chat-status {
+      color: var(--good);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .chat-body {
+      position: relative;
+      z-index: 1;
+      padding: 18px 16px 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .chat-day {
+      justify-self: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 213, 255, 0.12);
+      background: rgba(123, 213, 255, 0.06);
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .chat-msg {
+      display: grid;
+      gap: 6px;
+      max-width: 88%;
+    }
+
+    .chat-msg.self {
+      justify-self: end;
+    }
+
+    .chat-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .chat-head strong {
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .chat-bubble {
+      padding: 14px 16px;
+      border-radius: 18px 18px 18px 6px;
+      border: 1px solid rgba(123, 213, 255, 0.14);
+      background: rgba(255, 255, 255, 0.05);
+      color: #d4e9ff;
+      font-size: 14px;
+      line-height: 1.55;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.16);
+    }
+
+    .chat-msg.self .chat-bubble {
+      border-radius: 18px 18px 6px 18px;
+      background: linear-gradient(135deg, rgba(103, 212, 255, 0.22), rgba(103, 212, 255, 0.08));
+      border-color: rgba(103, 212, 255, 0.2);
+      color: #eefbff;
+    }
+
+    .chat-msg.older .chat-bubble {
+      background: linear-gradient(135deg, rgba(255, 125, 156, 0.16), rgba(255, 125, 156, 0.06));
+      border-color: rgba(255, 125, 156, 0.18);
+      color: #ffe7ee;
+    }
+
+    .chat-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+      padding: 12px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(123, 213, 255, 0.12);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .chat-input::before {
+      content: "+";
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--cyan);
+      border: 1px solid rgba(123, 213, 255, 0.18);
+      background: rgba(123, 213, 255, 0.08);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
     .quote {
       padding: 18px 20px;
       border-left: 4px solid var(--neon);
@@ -895,23 +1065,57 @@
                 <span>Modo real</span>
                 <span>cena comum de projeto</span>
               </div>
-              <div class="blueprint">
-                <div class="blueprint-content">
-                  <div>
-                    <div class="tag" style="margin-bottom: 14px;">Dialogo de todo dia</div>
-                    <h3>Alguém precisa mexer no código. A documentação não existe.</h3>
+              <div class="chat-window">
+                <div class="chat-topbar">
+                  <div class="chat-title">
+                    <div class="chat-avatar">TD</div>
+                    <div>
+                      <strong>Time de dados e produto</strong>
+                      <span>Canal interno • conversa de projeto</span>
+                    </div>
                   </div>
-                  <div class="wire-stack">
-                    <div class="wire"></div>
-                    <div class="wire" style="max-width: 196px;"></div>
-                    <div class="wire" style="max-width: 152px;"></div>
+                  <div class="chat-status">Ao vivo</div>
+                </div>
+                <div class="chat-body">
+                  <div class="chat-day">Agora mesmo</div>
+
+                  <div class="chat-msg self">
+                    <div class="chat-head">
+                      <strong>Analista novo</strong>
+                      <span>09:14</span>
+                    </div>
+                    <div class="chat-bubble">
+                      Preciso mexer nesse código hoje, mas antes queria entender a lógica.
+                      Tem documentação disso?
+                    </div>
                   </div>
+
+                  <div class="chat-msg older">
+                    <div class="chat-head">
+                      <strong>Dev mais velho</strong>
+                      <span>09:15</span>
+                    </div>
+                    <div class="chat-bubble">
+                      Documentação? O que é isso? kkk
+                      Vai abrindo as queries, os notebooks, os dashboards e reza pra achar alguém que lembre.
+                    </div>
+                  </div>
+
+                  <div class="chat-msg self">
+                    <div class="chat-head">
+                      <strong>Analista novo</strong>
+                      <span>09:16</span>
+                    </div>
+                    <div class="chat-bubble">
+                      Então é exatamente esse o problema.
+                    </div>
+                  </div>
+
+                  <div class="chat-input">Responder nesta conversa...</div>
                 </div>
               </div>
               <div class="quote">
-                “Preciso mexer nesse código, mas antes queria entender a lógica.”
-                <br><br>
-                “Entender como? Que documentação? kkk”
+                Quando a conversa parece piada, o risco já é real: o projeto existe, mas o contexto não.
               </div>
             </div>
           </div>
