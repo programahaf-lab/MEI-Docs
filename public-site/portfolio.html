@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programa HAF | Portifolio</title>
+  <style>
+    :root {
+      --bg: #06101d;
+      --bg-2: #0b1730;
+      --panel: rgba(7, 17, 36, 0.9);
+      --panel-strong: rgba(8, 20, 45, 0.96);
+      --line: rgba(114, 218, 255, 0.18);
+      --line-strong: rgba(114, 218, 255, 0.42);
+      --text: #eef7ff;
+      --muted: #8ca7c8;
+      --accent: #70dbff;
+      --accent-2: #8cf6ff;
+      --good: #73ecaf;
+      --warn: #ffc56b;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(45, 111, 255, 0.22), transparent 20%),
+        radial-gradient(circle at 80% 20%, rgba(114, 218, 255, 0.16), transparent 18%),
+        linear-gradient(160deg, #040914 0%, #071120 45%, #0a1427 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(circle at center, black 44%, transparent 88%);
+      opacity: 0.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(1260px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .chip,
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(114, 218, 255, 0.18);
+      background: rgba(114, 218, 255, 0.07);
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .chip {
+      color: var(--accent);
+      width: fit-content;
+      text-transform: uppercase;
+    }
+
+    .hero,
+    .section,
+    .case-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero {
+      grid-template-columns: 1.15fr 0.85fr;
+      margin-bottom: 18px;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      padding: 24px;
+    }
+
+    .panel.strong {
+      background: var(--panel-strong);
+      border-color: rgba(114, 218, 255, 0.28);
+      box-shadow:
+        0 28px 90px rgba(0, 0, 0, 0.46),
+        inset 0 0 0 1px rgba(114, 218, 255, 0.07);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(114, 218, 255, 0.08), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 18%);
+    }
+
+    h1, h2, h3, p {
+      margin: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 0.95;
+      max-width: 12ch;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 3vw, 38px);
+      line-height: 0.96;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .lead,
+    .muted,
+    .card p,
+    li {
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+    }
+
+    .accent {
+      color: var(--accent);
+      text-shadow: 0 0 28px rgba(114, 218, 255, 0.3);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .metric,
+    .card,
+    .snippet {
+      position: relative;
+      border-radius: 22px;
+      border: 1px solid rgba(114, 218, 255, 0.16);
+      background: rgba(255, 255, 255, 0.045);
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-size: 28px;
+      letter-spacing: -0.05em;
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .meta-item {
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(114, 218, 255, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .meta-item strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--accent-2);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .case-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(114, 218, 255, 0.18);
+      background: rgba(114, 218, 255, 0.08);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 12px currentColor;
+    }
+
+    .label.warn {
+      color: var(--warn);
+    }
+
+    .label.good {
+      color: var(--good);
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #d9efff;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .callout {
+      padding: 20px 22px;
+      border-radius: 22px;
+      border: 1px solid rgba(115, 236, 175, 0.2);
+      background: linear-gradient(135deg, rgba(115, 236, 175, 0.1), rgba(114, 218, 255, 0.04));
+    }
+
+    .callout strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--good);
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 980px) {
+      .page {
+        width: min(100% - 24px, 1260px);
+        padding-top: 16px;
+      }
+
+      .hero,
+      .case-grid,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body::before {
+        display: none;
+      }
+
+      .panel {
+        padding: 18px;
+        border-radius: 22px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .chip,
+      .ghost {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: clamp(30px, 10vw, 42px);
+      }
+
+      h2 {
+        font-size: clamp(24px, 7vw, 30px);
+      }
+
+      .lead,
+      .muted,
+      .card p,
+      li {
+        font-size: 14px;
+        line-height: 1.55;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <span class="chip">Portifolio Programa HAF</span>
+      <a class="ghost" href="./index.html">Voltar para home</a>
+    </div>
+
+    <section class="hero">
+      <article class="panel strong">
+        <div class="label">Case real</div>
+        <h1>De notebook cru para <span class="accent">documentacao utilizavel</span>.</h1>
+        <p class="lead">
+          Este exemplo usa o notebook <code>silver_empresometro</code> e sua documentacao gerada
+          para mostrar o valor do metodo: o ativo tecnico continua o mesmo, mas a camada de leitura
+          muda completamente.
+        </p>
+        <div class="metrics">
+          <div class="metric">
+            <strong>15</strong>
+            <p>celulas organizadas e transformadas em narrativa compreensivel.</p>
+          </div>
+          <div class="metric">
+            <strong>6</strong>
+            <p>queries SQL mapeadas e descritas como parte do fluxo.</p>
+          </div>
+          <div class="metric">
+            <strong>23</strong>
+            <p>fontes de dados inventariadas na visao documentada.</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="panel">
+        <div class="label good">O que entra</div>
+        <div class="meta-list">
+          <div class="meta-item">
+            <strong>Ativo original</strong>
+            Notebook Databricks com SQL, Python, UDFs e transformacoes em cadeia.
+          </div>
+          <div class="meta-item">
+            <strong>Camada entregue</strong>
+            Resumo executivo, fluxo de processamento, fontes, queries, funcoes e outputs.
+          </div>
+          <div class="meta-item">
+            <strong>Leitor final</strong>
+            Engenharia, analytics, onboarding, continuidade operacional e lideranca tecnica.
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <article class="panel strong">
+        <div class="label warn">Antes x depois</div>
+        <h2>O ganho nao e “embelezar”. E reduzir atrito de entendimento.</h2>
+        <div class="case-grid">
+          <div class="card">
+            <h3>Antes: o notebook puro</h3>
+            <p>
+              O conhecimento esta espalhado entre celulas, UDFs, regras de normalizacao,
+              regex, tabelas intermediarias e convencoes do time. Quem abre precisa interpretar
+              implementacao e intencao ao mesmo tempo.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Depois: a camada documentada</h3>
+            <p>
+              O ativo passa a ter objetivo, resumo de fluxo, mapa de fontes, leitura de queries
+              e organizacao por secoes. O leitor deixa de “garimpar” e passa a navegar.
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <div class="case-grid">
+        <article class="panel">
+          <div class="label warn">Trecho do notebook</div>
+          <h3>Antes</h3>
+          <div class="snippet">
+            <pre>%sql
+DROP TABLE IF EXISTS jd.ds_silver_jd.empresometro_refinado;
+
+CREATE OR REPLACE TABLE jd.ds_silver_jd.empresometro_refinado
+COMMENT 'Tabela refinada a partir de empresometro...'
+AS
+WITH base AS (
+  SELECT *, UPPER(regexp_replace(produto_descricao, '[.,;:]+', ' ')) AS desc_up
+  FROM jd.ds_bronze_jd.bronze_empresometro
+),
+norm AS (...),
+norm2 AS (...),
+marca_text AS (...),
+mods AS (...),
+flag_bl AS (...),
+emissao AS (...),
+pot AS (...),
+equip AS (...)</pre>
+          </div>
+          <p class="muted" style="margin-top: 12px;">
+            O trecho mostra a densidade tecnica real: multiplas etapas encadeadas,
+            regras de negocio embutidas e dependencia forte de contexto para interpretar.
+          </p>
+        </article>
+
+        <article class="panel strong">
+          <div class="label good">Trecho da documentacao</div>
+          <h3>Depois</h3>
+          <div class="snippet">
+            <pre>Objetivo
+
+O notebook denominado "silver_empresometro" tem como finalidade
+realizar analises exploratorias sobre dados provenientes do
+"empresometro".
+
+Resumo do Fluxo
+
+O fluxo do notebook inicia-se com a importacao de bibliotecas,
+executa consultas SQL para limpeza e preparacao, cria tabelas
+refinadas e disponibiliza a tabela "silver_empresometro" pronta
+para analises adicionais e relatorios.</pre>
+          </div>
+          <p class="muted" style="margin-top: 12px;">
+            A documentacao converte implementacao em leitura orientada:
+            o que o notebook faz, por que ele existe e como navegar pelo material.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="case-grid">
+        <article class="panel">
+          <div class="label warn">Outro ponto do antes</div>
+          <h3>Resultado sem narrativa</h3>
+          <div class="snippet">
+            <pre>SELECT
+lower(concat(a.marca, ' ', a.equipamento, ' ', a.modelo)) as chave_empresometro,
+*
+FROM jd.ds_silver_jd.empresometro_refinado a
+
+Saidas observadas:
+- parse_status = OK / SEM_MODELO
+- flag_blacklist = SIM / NAO
+- categoria_item = MAQUINA / OUTROS / ...</pre>
+          </div>
+          <p class="muted" style="margin-top: 12px;">
+            Sem camada explicativa, a tabela final aparece pronta,
+            mas o leitor ainda nao sabe o fluxo, os criterios e a confianca da extracao.
+          </p>
+        </article>
+
+        <article class="panel">
+          <div class="label good">Outro ponto do depois</div>
+          <h3>Estrutura para leitura tecnica</h3>
+          <div class="snippet">
+            <pre>Indice
+
+1. Resumo Executivo
+2. Ambiente e Bibliotecas
+3. Fontes de Dados
+4. Queries SQL
+5. Fluxo de Processamento
+6. Funcoes e Classes Definidas
+7. Outputs e Resultados</pre>
+          </div>
+          <p class="muted" style="margin-top: 12px;">
+            O documento organiza o ativo como produto de leitura.
+            Isso reduz onboarding, melhora manutencao e facilita repasse entre pessoas.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="panel strong">
+        <div class="label">Leitura comercial</div>
+        <h2>O que esse caso prova para o cliente.</h2>
+        <div class="case-grid">
+          <div class="card">
+            <h3>Valor tecnico</h3>
+            <ul>
+              <li>Reduz tempo para entender notebooks complexos.</li>
+              <li>Explicita fontes, funcoes, queries e output final.</li>
+              <li>Facilita manutencao e transferencia entre times.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Valor executivo</h3>
+            <ul>
+              <li>Transforma ativo interno em algo apresentavel.</li>
+              <li>Permite mostrar profundidade sem expor caos.</li>
+              <li>Cria uma camada premium para proposta, handoff e governanca.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <article class="callout">
+        <strong>Onde esse case encaixa</strong>
+        Esse exemplo funciona muito bem para vender os pacotes tecnico avancado,
+        executivo e projeto sob medida. Ele mostra uma dor real: o ativo existe,
+        gera valor, mas sem documentacao estruturada vira dependencia de memoria e de pessoas.
+      </article>
+    </section>
+
+    <div class="footer-nav">
+      <a class="ghost" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">Quero usar isso no meu projeto</a>
+    </div>
+  </main>
+</body>
+</html>
