@@ -860,6 +860,10 @@
       transition: all 180ms ease;
     }
 
+    .nav-home {
+      text-decoration: none;
+    }
+
     .nav-btn:hover:not(:disabled) {
       background: var(--neon);
       color: #04101c;
@@ -1324,7 +1328,7 @@ github.com/programahaf-lab/MEI-Docs</div>
   </div>
 
   <nav class="nav">
-    <button class="nav-btn" id="prevBtn" type="button" aria-label="Slide anterior">&#8592;</button>
+    <a class="nav-btn nav-home" href="./index.html" aria-label="Voltar para home">&#8962;</a>
     <div class="dots" id="dots"></div>
     <button class="nav-btn" id="nextBtn" type="button" aria-label="Próximo slide">&#8594;</button>
   </nav>
@@ -1335,7 +1339,6 @@ github.com/programahaf-lab/MEI-Docs</div>
     const dotsEl = document.getElementById('dots');
     const cn = document.getElementById('cn');
     const tn = document.getElementById('tn');
-    const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const mouseGlow = document.getElementById('mouseGlow');
     let cur = 0;
@@ -1359,7 +1362,6 @@ github.com/programahaf-lab/MEI-Docs</div>
 
     function ui() {
       cn.textContent = String(cur + 1);
-      prevBtn.disabled = cur === 0;
       nextBtn.disabled = cur === total - 1;
       document.querySelectorAll('.dot').forEach((dot, index) => {
         dot.classList.toggle('on', index === cur);
@@ -1420,11 +1422,6 @@ github.com/programahaf-lab/MEI-Docs</div>
         startAuto();
       }, 5000);
     }
-
-    prevBtn.addEventListener('click', () => {
-      go(-1);
-      markInteraction();
-    });
 
     nextBtn.addEventListener('click', () => {
       go(1);
