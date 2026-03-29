@@ -838,6 +838,7 @@
     let current = 0;
     let busy = false;
     let autoTimer;
+    let idleTimer;
 
     tn.textContent = String(total);
 
@@ -848,7 +849,7 @@
       dot.setAttribute('aria-label', 'Ir para slide ' + (index + 1));
       dot.addEventListener('click', () => {
         goTo(index);
-        restartAuto();
+        markInteraction();
       });
       dotsEl.appendChild(dot);
     });
@@ -903,37 +904,51 @@
       }, 5200);
     }
 
+    function markInteraction() {
+      clearInterval(autoTimer);
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        restartAuto();
+      }, 5000);
+    }
+
     prevBtn.addEventListener('click', () => {
       move(-1);
-      restartAuto();
+      markInteraction();
     });
 
     nextBtn.addEventListener('click', () => {
       move(1);
-      restartAuto();
+      markInteraction();
     });
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight' || event.key === 'PageDown') {
         move(1);
-        restartAuto();
+        markInteraction();
       }
       if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
         move(-1);
-        restartAuto();
+        markInteraction();
       }
     });
 
     document.addEventListener('pointermove', (event) => {
       mouseGlow.style.left = event.clientX + 'px';
       mouseGlow.style.top = event.clientY + 'px';
+      markInteraction();
     });
+
+    document.addEventListener('pointerdown', markInteraction);
+    document.addEventListener('wheel', markInteraction, { passive: true });
+    document.addEventListener('touchstart', markInteraction, { passive: true });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         clearInterval(autoTimer);
+        clearTimeout(idleTimer);
       } else {
-        restartAuto();
+        markInteraction();
       }
     });
 

@@ -1081,7 +1081,7 @@
 
                   <div class="chat-msg self">
                     <div class="chat-head">
-                      <strong>Analista novo</strong>
+                      <strong>Estagiario</strong>
                       <span>09:14</span>
                     </div>
                     <div class="chat-bubble">
@@ -1092,7 +1092,7 @@
 
                   <div class="chat-msg older">
                     <div class="chat-head">
-                      <strong>Dev mais velho</strong>
+                      <strong>Dev Senior</strong>
                       <span>09:15</span>
                     </div>
                     <div class="chat-bubble">
@@ -1103,7 +1103,7 @@
 
                   <div class="chat-msg self">
                     <div class="chat-head">
-                      <strong>Analista novo</strong>
+                      <strong>Estagiario</strong>
                       <span>09:16</span>
                     </div>
                     <div class="chat-bubble">
@@ -1341,6 +1341,7 @@ github.com/programahaf-lab/MEI-Docs</div>
     let cur = 0;
     let busy = false;
     let autoTimer;
+    let idleTimer;
 
     tn.textContent = String(total);
 
@@ -1351,7 +1352,7 @@ github.com/programahaf-lab/MEI-Docs</div>
       dot.setAttribute('aria-label', 'Ir para slide ' + (index + 1));
       dot.addEventListener('click', () => {
         goTo(index);
-        startAuto();
+        markInteraction();
       });
       dotsEl.appendChild(dot);
     });
@@ -1412,37 +1413,51 @@ github.com/programahaf-lab/MEI-Docs</div>
       }, 4600);
     }
 
+    function markInteraction() {
+      stopAuto();
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        startAuto();
+      }, 5000);
+    }
+
     prevBtn.addEventListener('click', () => {
       go(-1);
-      startAuto();
+      markInteraction();
     });
 
     nextBtn.addEventListener('click', () => {
       go(1);
-      startAuto();
+      markInteraction();
     });
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowRight' || event.key === 'PageDown') {
         go(1);
-        startAuto();
+        markInteraction();
       }
       if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
         go(-1);
-        startAuto();
+        markInteraction();
       }
     });
 
     document.addEventListener('pointermove', (event) => {
       mouseGlow.style.left = event.clientX + 'px';
       mouseGlow.style.top = event.clientY + 'px';
+      markInteraction();
     });
+
+    document.addEventListener('pointerdown', markInteraction);
+    document.addEventListener('wheel', markInteraction, { passive: true });
+    document.addEventListener('touchstart', markInteraction, { passive: true });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         stopAuto();
+        clearTimeout(idleTimer);
       } else {
-        startAuto();
+        markInteraction();
       }
     });
 
