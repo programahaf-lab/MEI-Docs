@@ -366,7 +366,7 @@
         <div class="label">Case real</div>
         <h1>De notebook cru para <span class="accent">documentacao utilizavel</span>.</h1>
         <p class="lead">
-          Este exemplo usa o notebook <code>silver_empresometro</code> e sua documentacao gerada
+          Este exemplo usa o notebook <code>silver_tabelaexemplo</code> e sua documentacao gerada
           para mostrar o valor do metodo: o ativo tecnico continua o mesmo, mas a camada de leitura
           muda completamente.
         </p>
@@ -436,14 +436,14 @@
           <h3>Antes</h3>
           <div class="snippet">
             <pre>%sql
-DROP TABLE IF EXISTS jd.ds_silver_jd.empresometro_refinado;
+DROP TABLE IF EXISTS ex.md_silver.tabelaexemplo1;
 
-CREATE OR REPLACE TABLE jd.ds_silver_jd.empresometro_refinado
-COMMENT 'Tabela refinada a partir de empresometro...'
+CREATE OR REPLACE TABLE ex.md_silver.tabelaexemplo1
+COMMENT 'Tabela refinada a partir de notebook...'
 AS
 WITH base AS (
   SELECT *, UPPER(regexp_replace(produto_descricao, '[.,;:]+', ' ')) AS desc_up
-  FROM jd.ds_bronze_jd.bronze_empresometro
+  FROM ex.md_silver.tabelaexemplo
 ),
 norm AS (...),
 norm2 AS (...),
@@ -466,15 +466,15 @@ equip AS (...)</pre>
           <div class="snippet">
             <pre>Objetivo
 
-O notebook denominado "silver_empresometro" tem como finalidade
+O notebook denominado "silver_tabelaexemplo" tem como finalidade
 realizar analises exploratorias sobre dados provenientes do
-"empresometro".
+"notebook".
 
 Resumo do Fluxo
 
 O fluxo do notebook inicia-se com a importacao de bibliotecas,
 executa consultas SQL para limpeza e preparacao, cria tabelas
-refinadas e disponibiliza a tabela "silver_empresometro" pronta
+refinadas e disponibiliza a tabela "silver_tabelas" pronta
 para analises adicionais e relatorios.</pre>
           </div>
           <p class="muted" style="margin-top: 12px;">
@@ -492,9 +492,9 @@ para analises adicionais e relatorios.</pre>
           <h3>Resultado sem narrativa</h3>
           <div class="snippet">
             <pre>SELECT
-lower(concat(a.marca, ' ', a.equipamento, ' ', a.modelo)) as chave_empresometro,
+lower(concat(a.marca, ' ', a.equipamento, ' ', a.modelo)) as chave_tabela,
 *
-FROM jd.ds_silver_jd.empresometro_refinado a
+FROM ex.md_silver.tabelaexemplo1 a
 
 Saidas observadas:
 - parse_status = OK / SEM_MODELO
