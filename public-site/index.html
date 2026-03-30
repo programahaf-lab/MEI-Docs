@@ -762,6 +762,14 @@
       background: rgba(255, 255, 255, 0.04);
     }
 
+    .format-block.flush {
+      margin-top: auto;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
     .format-block h3 {
       margin-bottom: 10px;
     }
@@ -1890,7 +1898,7 @@
           </div>
         </div>
 
-        <div class="panel">
+        <div class="panel" style="display: flex; flex-direction: column;">
           <div class="tag">O que isso vende</div>
           <h3>Não é sobre Documentação para documentar.</h3>
           <p class="subcopy">
@@ -1900,7 +1908,7 @@
           <div class="quote" style="margin-top: 18px;">
             O serviço vale porque reduz fricção agora e protege o projeto depois.
           </div>
-          <div class="format-block" style="margin-top: 18px;">
+          <div class="format-block flush" style="padding-top: 44px;">
             <h3>Onde o método se aplica</h3>
             <div class="format-list">
               <div class="format-item">
