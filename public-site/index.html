@@ -393,6 +393,7 @@
 
     .cta,
     .ghost,
+    .hero-cta,
     .portfolio-cta {
       display: inline-flex;
       align-items: center;
@@ -411,6 +412,79 @@
       background: linear-gradient(135deg, var(--neon-2) 0%, var(--neon) 100%);
       color: #05111f;
       box-shadow: 0 16px 38px rgba(123, 213, 255, 0.24);
+    }
+
+    .hero-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      border: 1px solid rgba(140, 248, 255, 0.42);
+      background: linear-gradient(135deg, #d9ffff 0%, #8cf6ff 38%, #4fcfff 100%);
+      color: #04131f;
+      box-shadow:
+        0 0 0 1px rgba(180, 255, 255, 0.14) inset,
+        0 16px 40px rgba(84, 211, 255, 0.28),
+        0 0 34px rgba(103, 212, 255, 0.2);
+    }
+
+    .hero-cta::before {
+      content: "";
+      position: absolute;
+      inset: -9px;
+      border-radius: 999px;
+      z-index: -2;
+      background: radial-gradient(circle, rgba(103, 212, 255, 0.28) 0%, rgba(103, 212, 255, 0) 72%);
+      filter: blur(11px);
+      opacity: 0.95;
+    }
+
+    .hero-cta::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 999px;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0) 44%);
+      opacity: 0.88;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 0 0 1px rgba(191, 255, 255, 0.18) inset,
+        0 20px 46px rgba(84, 211, 255, 0.34),
+        0 0 42px rgba(103, 212, 255, 0.28);
+    }
+
+    .hero-cta .spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(237, 255, 255, 1) 0%, rgba(140, 248, 255, 0.9) 44%, rgba(140, 248, 255, 0) 100%);
+      box-shadow: 0 0 12px rgba(140, 248, 255, 0.7);
+      animation: orbit-glow-cyan 3.7s linear infinite;
+    }
+
+    .hero-cta .spark.h1 {
+      top: 50%;
+      left: -6px;
+      animation-delay: -0.8s;
+    }
+
+    .hero-cta .spark.h2 {
+      top: -7px;
+      right: 18px;
+      animation-duration: 4.4s;
+      animation-delay: -1.6s;
+    }
+
+    .hero-cta .spark.h3 {
+      left: 28px;
+      bottom: -7px;
+      animation-duration: 3.2s;
+      animation-delay: -2.4s;
     }
 
     .ghost {
@@ -511,6 +585,29 @@
       100% {
         transform: translate3d(0, 0, 0) scale(0.85);
         opacity: 0.65;
+      }
+    }
+
+    @keyframes orbit-glow-cyan {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.82);
+        opacity: 0.62;
+      }
+      20% {
+        transform: translate3d(6px, -4px, 0) scale(1.06);
+        opacity: 0.94;
+      }
+      45% {
+        transform: translate3d(2px, -10px, 0) scale(0.9);
+        opacity: 0.72;
+      }
+      70% {
+        transform: translate3d(-7px, 3px, 0) scale(1.08);
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(0.82);
+        opacity: 0.62;
       }
     }
 
@@ -1270,6 +1367,7 @@
 
       .cta,
       .ghost,
+      .hero-cta,
       .portfolio-cta {
         min-height: 42px;
         padding: 10px 14px;
@@ -1281,6 +1379,7 @@
         padding: 16px;
       }
 
+      .hero-cta .spark,
       .portfolio-cta .spark {
         width: 6px;
         height: 6px;
@@ -1429,7 +1528,12 @@
                 transformar caos técnico em narrativa útil e entregar uma camada premium para operação, onboarding e venda.
               </p>
               <div class="hero-actions">
-                <a class="cta" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">Quero conversar</a>
+                <a class="hero-cta" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">
+                  <span class="spark h1" aria-hidden="true"></span>
+                  <span class="spark h2" aria-hidden="true"></span>
+                  <span class="spark h3" aria-hidden="true"></span>
+                  Quero conversar
+                </a>
                 <a class="portfolio-cta" href="./portfolio.html">
                   <span class="spark s1" aria-hidden="true"></span>
                   <span class="spark s2" aria-hidden="true"></span>
