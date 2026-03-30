@@ -565,6 +565,78 @@
       animation-delay: -2.2s;
     }
 
+    .contact-cta {
+      position: relative;
+      isolation: isolate;
+      overflow: visible;
+      border: 1px solid rgba(255, 232, 124, 0.5);
+      background: linear-gradient(135deg, #fff4a1 0%, #ffd54a 40%, #ffb81c 100%);
+      color: #211400;
+      box-shadow:
+        0 0 0 1px rgba(255, 245, 180, 0.16) inset,
+        0 16px 40px rgba(255, 193, 50, 0.3),
+        0 0 34px rgba(255, 214, 82, 0.22);
+    }
+
+    .contact-cta::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+      z-index: -2;
+      background: radial-gradient(circle, rgba(255, 220, 90, 0.3) 0%, rgba(255, 220, 90, 0) 72%);
+      filter: blur(10px);
+      opacity: 0.95;
+    }
+
+    .contact-cta::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 999px;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0) 46%);
+      opacity: 0.85;
+    }
+
+    .contact-cta:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 0 0 1px rgba(255, 248, 200, 0.2) inset,
+        0 20px 46px rgba(255, 193, 50, 0.36),
+        0 0 42px rgba(255, 214, 82, 0.28);
+    }
+
+    .contact-cta .spark {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(255, 252, 226, 1) 0%, rgba(255, 221, 95, 0.9) 44%, rgba(255, 221, 95, 0) 100%);
+      box-shadow: 0 0 12px rgba(255, 234, 132, 0.7);
+      animation: orbit-contact 3.9s linear infinite;
+    }
+
+    .contact-cta .spark.c1 {
+      left: 24px;
+      top: -7px;
+    }
+
+    .contact-cta .spark.c2 {
+      right: -6px;
+      top: 48%;
+      animation-duration: 4.5s;
+      animation-delay: -1.2s;
+    }
+
+    .contact-cta .spark.c3 {
+      left: 44px;
+      bottom: -7px;
+      animation-duration: 3.3s;
+      animation-delay: -2.1s;
+    }
+
     @keyframes orbit-glow {
       0% {
         transform: translate3d(0, 0, 0) scale(0.85);
@@ -603,6 +675,29 @@
       }
       70% {
         transform: translate3d(-7px, 3px, 0) scale(1.08);
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(0.82);
+        opacity: 0.62;
+      }
+    }
+
+    @keyframes orbit-contact {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.82);
+        opacity: 0.62;
+      }
+      22% {
+        transform: translate3d(5px, -6px, 0) scale(1.08);
+        opacity: 0.96;
+      }
+      48% {
+        transform: translate3d(-2px, -1px, 0) scale(0.9);
+        opacity: 0.72;
+      }
+      74% {
+        transform: translate3d(-6px, 7px, 0) scale(1.06);
         opacity: 1;
       }
       100% {
@@ -1184,11 +1279,24 @@
       line-height: 1.5;
     }
 
+    .contact-mini {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
     .contact-cta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 6px;
+    }
+
+    .contact-copy {
+      border: 1px solid rgba(123, 213, 255, 0.18);
+      background: rgba(123, 213, 255, 0.06);
+      color: var(--text);
     }
 
     .contact-emphasis {
@@ -1396,7 +1504,8 @@
       .cta,
       .ghost,
       .hero-cta,
-      .portfolio-cta {
+      .portfolio-cta,
+      .contact-cta {
         min-height: 42px;
         padding: 10px 14px;
         font-size: 12px;
@@ -1408,7 +1517,8 @@
       }
 
       .hero-cta .spark,
-      .portfolio-cta .spark {
+      .portfolio-cta .spark,
+      .contact-cta .spark {
         width: 6px;
         height: 6px;
       }
@@ -1556,7 +1666,7 @@
                 transformar caos técnico em narrativa útil e entregar uma camada premium para operação, onboarding e venda.
               </p>
               <div class="hero-actions">
-                <a class="hero-cta" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">
+                <a class="hero-cta" href="#contato" data-slide-target="5">
                   <span class="spark h1" aria-hidden="true"></span>
                   <span class="spark h2" aria-hidden="true"></span>
                   <span class="spark h3" aria-hidden="true"></span>
@@ -1830,7 +1940,7 @@
       </div>
     </section>
 
-    <section class="slide contact">
+    <section class="slide contact" id="contato">
       <div class="slide-grid single">
         <div class="panel strong contact-panel">
           <div class="contact-stack">
@@ -1841,18 +1951,18 @@
               contexto de menos e dependência de memória informal, a conversa certa é sobre continuidade,
               clareza e documentação que realmente sustenta evolução.
             </p>
-            <div class="contact-emphasis">
-              <strong>Vamos abrir a conversa</strong>
-              Se a ideia fizer sentido, este é o ponto de saída do deck e o início do contato.
-            </div>
-            <div class="contact-links">
-              <a class="contact-link" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">
-                <strong>Contato direto</strong>
-                <span>Abra o e-mail e envie sua mensagem para iniciar a conversa comercial e técnica.</span>
-              </a>
-            </div>
             <div class="contact-cta-row">
-              <a class="cta" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">Falar agora</a>
+              <a
+                class="contact-cta"
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=programahaf@gmail.com&su=Quero%20conversar%20sobre%20documentacao"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="spark c1" aria-hidden="true"></span>
+                <span class="spark c2" aria-hidden="true"></span>
+                <span class="spark c3" aria-hidden="true"></span>
+                Falar agora
+              </a>
             </div>
           </div>
 
@@ -1980,6 +2090,17 @@ Abrir envio de e-mail pelo botao de contato</div>
     nextBtn.addEventListener('click', () => {
       go(1);
       markInteraction();
+    });
+
+    document.querySelectorAll('[data-slide-target]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = Number(link.getAttribute('data-slide-target'));
+        if (Number.isFinite(target)) {
+          goTo(target);
+          markInteraction();
+        }
+      });
     });
 
     document.addEventListener('keydown', (event) => {
