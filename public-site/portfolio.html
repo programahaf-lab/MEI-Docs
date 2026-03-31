@@ -89,6 +89,9 @@
 
     .contact-cta {
       position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       overflow: visible;
       min-height: 52px;
       padding: 14px 22px;
@@ -106,6 +109,11 @@
         0 16px 40px rgba(255, 193, 50, 0.3),
         0 0 34px rgba(255, 214, 82, 0.22);
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .contact-cta .label {
+      position: relative;
+      top: 1px;
     }
 
     .contact-cta::before {
@@ -172,6 +180,69 @@
       height: 4px;
       color: rgba(255, 234, 148, 0.9);
       animation-delay: -3.4s;
+    }
+
+    .contact-cta .spark.c4 {
+      top: -10px;
+      left: 34px;
+      width: 3px;
+      height: 3px;
+      color: rgba(255, 241, 163, 0.92);
+      animation-delay: -1.2s;
+    }
+
+    .contact-cta .spark.c5 {
+      top: 10px;
+      left: -9px;
+      width: 4px;
+      height: 4px;
+      color: rgba(255, 225, 112, 0.86);
+      animation-delay: -4.1s;
+    }
+
+    .contact-cta .spark.c6 {
+      bottom: 8px;
+      right: -8px;
+      width: 3px;
+      height: 3px;
+      color: rgba(255, 249, 201, 0.92);
+      animation-delay: -2.9s;
+    }
+
+    .contact-cta .spark.c7 {
+      bottom: -11px;
+      right: 38px;
+      width: 5px;
+      height: 5px;
+      color: rgba(255, 213, 92, 0.82);
+      animation-delay: -5s;
+    }
+
+    .contact-cta .spark.c8 {
+      top: 50%;
+      left: -11px;
+      width: 3px;
+      height: 3px;
+      color: rgba(255, 238, 154, 0.88);
+      animation-delay: -0.9s;
+    }
+
+    .contact-cta .spark.c9 {
+      top: -7px;
+      right: 58px;
+      width: 4px;
+      height: 4px;
+      color: rgba(255, 247, 191, 0.9);
+      animation-delay: -3.7s;
+    }
+
+    .contact-cta .spark.c10 {
+      bottom: -10px;
+      left: 52px;
+      width: 3px;
+      height: 3px;
+      color: rgba(255, 229, 128, 0.9);
+      animation-delay: -1.8s;
     }
 
     @keyframes contactSpark {
@@ -671,7 +742,14 @@ Saidas observadas:
         <span class="spark c1" aria-hidden="true"></span>
         <span class="spark c2" aria-hidden="true"></span>
         <span class="spark c3" aria-hidden="true"></span>
-        Quero usar isso no meu projeto
+        <span class="spark c4" aria-hidden="true"></span>
+        <span class="spark c5" aria-hidden="true"></span>
+        <span class="spark c6" aria-hidden="true"></span>
+        <span class="spark c7" aria-hidden="true"></span>
+        <span class="spark c8" aria-hidden="true"></span>
+        <span class="spark c9" aria-hidden="true"></span>
+        <span class="spark c10" aria-hidden="true"></span>
+        <span class="label">Quero usar isso no meu projeto</span>
       </a>
     </div>
   </main>
