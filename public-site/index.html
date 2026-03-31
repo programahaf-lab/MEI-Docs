@@ -2143,6 +2143,12 @@ Abrir envio de e-mail pelo botao de contato</div>
     }
 
     function syncSlideWithHash() {
+      const params = new URLSearchParams(window.location.search);
+      const slideParam = Number(params.get('slide'));
+      if (Number.isInteger(slideParam) && slideParam >= 0 && slideParam < total) {
+        setInitialSlide(slideParam);
+        return;
+      }
       if (window.location.hash === '#contato') {
         setInitialSlide(total - 1);
       }
