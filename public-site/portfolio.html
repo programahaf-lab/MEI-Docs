@@ -87,6 +87,108 @@
       letter-spacing: 0.06em;
     }
 
+    .contact-cta {
+      position: relative;
+      overflow: visible;
+      min-height: 52px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 234, 132, 0.54);
+      background: linear-gradient(135deg, #fff7b0 0%, #ffd84e 42%, #ffbf1f 100%);
+      color: #221500;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow:
+        0 0 0 1px rgba(255, 243, 160, 0.18) inset,
+        0 16px 40px rgba(255, 193, 50, 0.3),
+        0 0 34px rgba(255, 214, 82, 0.22);
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .contact-cta::before {
+      content: "";
+      position: absolute;
+      inset: -8px;
+      border-radius: 999px;
+      z-index: -2;
+      background: radial-gradient(circle, rgba(255, 220, 90, 0.3) 0%, rgba(255, 220, 90, 0) 72%);
+      filter: blur(10px);
+      opacity: 0.95;
+    }
+
+    .contact-cta::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: 999px;
+      z-index: -1;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.36), rgba(255, 255, 255, 0) 46%);
+      opacity: 0.85;
+    }
+
+    .contact-cta:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow:
+        0 0 0 1px rgba(255, 248, 200, 0.2) inset,
+        0 20px 46px rgba(255, 193, 50, 0.36),
+        0 0 42px rgba(255, 214, 82, 0.28);
+    }
+
+    .contact-cta .spark {
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+      opacity: 0.95;
+      filter: blur(0.2px);
+      box-shadow: 0 0 12px currentColor;
+      animation: contactSpark 5.8s ease-in-out infinite;
+    }
+
+    .contact-cta .spark.c1 {
+      top: -8px;
+      right: 20px;
+      width: 5px;
+      height: 5px;
+      color: rgba(255, 244, 181, 0.96);
+      animation-delay: -0.5s;
+    }
+
+    .contact-cta .spark.c2 {
+      bottom: -9px;
+      left: 22px;
+      width: 4px;
+      height: 4px;
+      color: rgba(255, 220, 108, 0.88);
+      animation-delay: -2.1s;
+    }
+
+    .contact-cta .spark.c3 {
+      top: 50%;
+      right: -10px;
+      width: 4px;
+      height: 4px;
+      color: rgba(255, 234, 148, 0.9);
+      animation-delay: -3.4s;
+    }
+
+    @keyframes contactSpark {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(0.9);
+        opacity: 0.35;
+      }
+      30% {
+        transform: translate3d(3px, -6px, 0) scale(1.15);
+        opacity: 1;
+      }
+      65% {
+        transform: translate3d(-4px, 7px, 0) scale(0.78);
+        opacity: 0.55;
+      }
+    }
+
     .chip {
       color: var(--accent);
       width: fit-content;
@@ -565,7 +667,12 @@ Saidas observadas:
     </section>
 
     <div class="footer-nav">
-      <a class="ghost" href="mailto:programahaf@gmail.com?subject=Quero%20conversar%20sobre%20documentacao">Quero usar isso no meu projeto</a>
+      <a class="contact-cta" href="./index.html#contato">
+        <span class="spark c1" aria-hidden="true"></span>
+        <span class="spark c2" aria-hidden="true"></span>
+        <span class="spark c3" aria-hidden="true"></span>
+        Quero usar isso no meu projeto
+      </a>
     </div>
   </main>
 </body>
